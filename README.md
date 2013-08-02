@@ -1,7 +1,7 @@
-html2canvas-proxy-php 0.0.1
+html2canvas-proxy-csharp 0.0.1
 =====================
 
-#### PHP Proxy html2canvas ( php 5.0+ ) ####
+#### C# Proxy html2canvas ####
 
 This script allows you to use html2canvas.js with different servers, ports and protocols (http, https), preventing to occur "tainted" when exporting the "canvas" for image.
 
