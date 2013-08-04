@@ -102,7 +102,7 @@ public class Html2CanvasProxy : IHttpHandler {
 							HS.AddHeader("Pragma", "max-age="+(CCACHE-1));
 							HS.AddHeader("Expires", new DateTime(DateTime.UtcNow.Ticks).AddSeconds(CCACHE-1).ToString("R"));
 
-							HS.Write(getcallback+"("+JSON_ENCODE(fullurl)+")");
+							HS.Write(getcallback+"("+Html2CanvasProxy.JSON_ENCODE(fullurl)+")");
 							return;
 						} else {
 							ERR = "no such file";
@@ -113,7 +113,7 @@ public class Html2CanvasProxy : IHttpHandler {
 				ERR = e.ToString();
 			}
 		}
-		HS.Write(getcallback+"("+JSON_ENCODE("error:"+ERR)+")");
+		HS.Write(getcallback+"("+Html2CanvasProxy.JSON_ENCODE("error:"+ERR)+")");
 	}
 
 	public bool IsReusable {
