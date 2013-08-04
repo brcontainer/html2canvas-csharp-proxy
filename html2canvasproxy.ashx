@@ -97,6 +97,11 @@ public class Html2CanvasProxy : IHttpHandler {
 							fullurl += "images/"+shafile;
 							fullurl = fullurl;
 
+							HS.AddHeader("Last-Modified", DateTime.UtcNow.ToString("R"));
+							HS.AddHeader("Cache-Control", "max-age="+(CCACHE-1)+", must-revalidate");
+							HS.AddHeader("Pragma", "max-age="+(CCACHE-1));
+							HS.AddHeader("Expires", new DateTime(DateTime.UtcNow.Ticks).AddSeconds(CCACHE-1).ToString("R"));
+
 							HS.Write(getcallback+"("+JSON_ENCODE(fullurl)+")");
 							return;
 						} else {
