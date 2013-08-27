@@ -47,70 +47,76 @@ public class Html2CanvasProxy : IHttpHandler {
 			bool isExists = System.IO.Directory.Exists(realpath);
 			if(!isExists) {
 				System.IO.Directory.CreateDirectory(realpath);
+				isExists = System.IO.Directory.Exists(realpath);
+				if(!isExists) {
+					ERR = "\""+realpath+"\" folder can not be created.";
+				}
 			}
 
-			WebRequest request = WebRequest.Create (geturl);
-			((HttpWebRequest)request).UserAgent = context.Request.UserAgent;
+			if(ERR=="") {
+				WebRequest request = WebRequest.Create (geturl);
+				((HttpWebRequest)request).UserAgent = context.Request.UserAgent;
 
-			// If required by the server, set the credentials.
-			request.Credentials = CredentialCache.DefaultCredentials;
+				// If required by the server, set the credentials.
+				request.Credentials = CredentialCache.DefaultCredentials;
 
-			try {
-				HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+				try {
+					HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-				if(!(response.StatusCode == HttpStatusCode.OK && response.ContentLength>0)){
-					ERR = response.StatusCode.ToString();
-				} else {
-					MIME = response.ContentType.ToLower().Trim();
-					if("|image/jpeg|image/jpg|image/png|image/gif|text/html|application/xhtml|".IndexOf("|"+MIME+"|")==-1){
-						ERR = MIME+" mime is invalid";
+					if(!(response.StatusCode == HttpStatusCode.OK && response.ContentLength>0)){
+						ERR = response.StatusCode.ToString();
 					} else {
-						HashAlgorithm sha = SHA1.Create();
-						byte[] shafilebyte = sha.ComputeHash(Encoding.UTF8.GetBytes(geturl));
-						string shafile = BitConverter.ToString(shafilebyte).Replace("-", "").ToLowerInvariant();
-
-						Stream receiveStream = response.GetResponseStream();
-						
-						using (System.IO.FileStream fs = System.IO.File.Create(realpath+"/"+shafile)) {
-							int bytesRead;
-							byte[] buffer = new byte[response.ContentLength];
-
-							while((bytesRead = receiveStream.Read(buffer, 0, buffer.Length)) != 0) {
-								fs.Write(buffer, 0, bytesRead);
-							}
-						}
-
-						if(System.IO.File.Exists(realpath+"/"+shafile)){
-							string fullurl = "http://";
-							if(context.Request.Url.Port==443){
-								fullurl = "https://";
-							}
-							fullurl += context.Request.Url.Host;
-							if(context.Request.Url.Port!=80 && context.Request.Url.Port!=443){
-								fullurl += ":"+context.Request.Url.Port.ToString();
-							}
-
-							string[] uri = context.Request.Url.Segments;
-							uri[uri.Length-1]="";
-
-							fullurl += String.Join("/", uri).Replace("//","/");
-							fullurl += "images/"+shafile;
-							fullurl = fullurl;
-
-							HS.AddHeader("Last-Modified", DateTime.UtcNow.ToString("R"));
-							HS.AddHeader("Cache-Control", "max-age="+(CCACHE-1)+", must-revalidate");
-							HS.AddHeader("Pragma", "max-age="+(CCACHE-1));
-							HS.AddHeader("Expires", new DateTime(DateTime.UtcNow.Ticks).AddSeconds(CCACHE-1).ToString("R"));
-
-							HS.Write(getcallback+"("+Html2CanvasProxy.JSON_ENCODE(fullurl)+")");
-							return;
+						MIME = response.ContentType.ToLower().Trim();
+						if("|image/jpeg|image/jpg|image/png|image/gif|text/html|application/xhtml|".IndexOf("|"+MIME+"|")==-1){
+							ERR = MIME+" mime is invalid";
 						} else {
-							ERR = "no such file";
+							HashAlgorithm sha = SHA1.Create();
+							byte[] shafilebyte = sha.ComputeHash(Encoding.UTF8.GetBytes(geturl));
+							string shafile = BitConverter.ToString(shafilebyte).Replace("-", "").ToLowerInvariant();
+
+							Stream receiveStream = response.GetResponseStream();
+							
+							using (System.IO.FileStream fs = System.IO.File.Create(realpath+"/"+shafile)) {
+								int bytesRead;
+								byte[] buffer = new byte[response.ContentLength];
+
+								while((bytesRead = receiveStream.Read(buffer, 0, buffer.Length)) != 0) {
+									fs.Write(buffer, 0, bytesRead);
+								}
+							}
+
+							if(System.IO.File.Exists(realpath+"/"+shafile)){
+								string fullurl = "http://";
+								if(context.Request.Url.Port==443){
+									fullurl = "https://";
+								}
+								fullurl += context.Request.Url.Host;
+								if(context.Request.Url.Port!=80 && context.Request.Url.Port!=443){
+									fullurl += ":"+context.Request.Url.Port.ToString();
+								}
+
+								string[] uri = context.Request.Url.Segments;
+								uri[uri.Length-1]="";
+
+								fullurl += String.Join("/", uri).Replace("//","/");
+								fullurl += PATH+"/"+shafile;
+								fullurl = fullurl;
+
+								HS.AddHeader("Last-Modified", DateTime.UtcNow.ToString("R"));
+								HS.AddHeader("Cache-Control", "max-age="+(CCACHE-1)+", must-revalidate");
+								HS.AddHeader("Pragma", "max-age="+(CCACHE-1));
+								HS.AddHeader("Expires", new DateTime(DateTime.UtcNow.Ticks).AddSeconds(CCACHE-1).ToString("R"));
+
+								HS.Write(getcallback+"("+Html2CanvasProxy.JSON_ENCODE(fullurl)+")");
+								return;
+							} else {
+								ERR = "no such file";
+							}
 						}
 					}
+				} catch (WebException e) {
+					ERR = e.ToString();
 				}
-			} catch (WebException e) {
-				ERR = e.ToString();
 			}
 		}
 		HS.Write(getcallback+"("+Html2CanvasProxy.JSON_ENCODE("error:"+ERR)+")");
