@@ -45,7 +45,8 @@ public class FireTest : IHttpHandler {
 		fullurl += PATH+"/"+shafile;
 		fullurl = fullurl;
 
-		HS.Write("realpath: \""+realpath+"\"");
+		HS.Write("url: \""+geturl+"\"");
+		HS.Write("\r\nrealpath: \""+realpath+"\"");
 		HS.Write("\r\nrealPathFile: \""+realPathFile+"\"");
 		HS.Write("\r\nfullurl: \""+fullurl+"\"");
 	}
