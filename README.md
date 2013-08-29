@@ -43,3 +43,9 @@ for a new image, a security error occurs (actually occurs is a security lock), w
     </body>
 </html>
 ```
+
+### Alternatives ###
+You are not using html2canvas but need a similar solution?
+See **simpleHttpProxy**:
+
+*c#* https://github.com/brcontainer/simple-http-proxy-csharp
