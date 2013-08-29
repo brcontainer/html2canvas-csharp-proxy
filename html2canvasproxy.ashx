@@ -76,7 +76,7 @@ public class Html2CanvasProxy : IHttpHandler {
 
 							Stream receiveStream = response.GetResponseStream();
 							
-							using (System.IO.FileStream fs = System.IO.File.Create(realpath+"/"+shafile)) {
+							using (System.IO.FileStream fs = System.IO.File.Create(realpath+"\\"+shafile)) {
 								int bytesRead;
 								byte[] buffer = new byte[response.ContentLength];
 
@@ -85,7 +85,7 @@ public class Html2CanvasProxy : IHttpHandler {
 								}
 							}
 
-							if(System.IO.File.Exists(realpath+"/"+shafile)){
+							if(System.IO.File.Exists(realpath+"\\"+shafile)){
 								string fullurl = "http://";
 								if(context.Request.Url.Port==443){
 									fullurl = "https://";
