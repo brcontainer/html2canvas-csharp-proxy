@@ -1,6 +1,6 @@
 <%@ WebHandler Language="C#" Debug="true" Class="Html2CanvasProxy" %>
 /*
-  html2canvas-csharp-proxy 0.0.1
+  html2canvas-csharp-proxy 0.0.2
   Copyright (c) 2013 Guilherme Nascimento (brcontainer@yahoo.com.br)
 
   Released under the MIT license
@@ -73,6 +73,9 @@ public class Html2CanvasProxy : IHttpHandler {
 							HashAlgorithm sha = SHA1.Create();
 							byte[] shafilebyte = sha.ComputeHash(Encoding.UTF8.GetBytes(geturl));
 							string shafile = BitConverter.ToString(shafilebyte).Replace("-", "").ToLowerInvariant();
+
+							string extesionFile = MIME.Replace("image/", "").Replace("text/", "").Replace("application/", "").Replace("x-", "").Replace("jpeg", "jpg");
+							shafile = shafile+"."+extesionFile;
 
 							Stream receiveStream = response.GetResponseStream();
 							
