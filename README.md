@@ -3,7 +3,17 @@ html2canvas-proxy-csharp 0.0.1
 
 #### C# Proxy html2canvas ####
 
-This script allows you to use html2canvas.js with different servers, ports and protocols (http, https), preventing to occur "tainted" when exporting the "canvas" for image.
+
+This script allows you to use **html2canvas.js** with different servers, ports and protocols (http, https),
+preventing to occur "tainted" when exporting the `<canvas>` for image.
+
+###Problem and Solution###
+When adding an image that belongs to another domain in `<canvas>` and after that try to export the canvas
+for a new image, a security error occurs (actually occurs is a security lock), which can return the error:
+
+> SecurityError: DOM Exception 18
+>
+> Error: An attempt was made to break through the security policy of the user agent.
 
 ### Usage ###
 
