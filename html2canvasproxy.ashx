@@ -67,14 +67,14 @@ public class Html2CanvasProxy : IHttpHandler {
 						ERR = response.StatusCode.ToString();
 					} else {
 						MIME = response.ContentType.ToLower().Trim();
-						if("|image/jpeg|image/jpg|image/png|image/gif|text/html|application/xhtml|".IndexOf("|"+MIME+"|")==-1){
+						if("|image/jpeg|image/jpg|image/png|image/gif|text/html|application/xhtml|application/xhtml+xml|".IndexOf("|"+MIME+"|")==-1){
 							ERR = MIME+" mime is invalid";
 						} else {
 							HashAlgorithm sha = SHA1.Create();
 							byte[] shafilebyte = sha.ComputeHash(Encoding.UTF8.GetBytes(geturl));
 							string shafile = BitConverter.ToString(shafilebyte).Replace("-", "").ToLowerInvariant();
 
-							string extesionFile = MIME.Replace("image/", "").Replace("text/", "").Replace("application/", "").Replace("x-", "").Replace("jpeg", "jpg");
+							string extesionFile = MIME.Replace("image/", "").Replace("text/", "").Replace("application/", "").Replace("x-", "").Replace("jpeg", "jpg").Replace("xhtml+xml", "xhtml");
 							shafile = shafile+"."+extesionFile;
 
 							Stream receiveStream = response.GetResponseStream();
