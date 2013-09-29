@@ -32,13 +32,13 @@ public class Html2CanvasProxy : IHttpHandler {
 		string d;
 		string[] e = new string[j];
 
-		for (int i=0; i<j; i++) {
+		for ( int i=0; i < j; i++ ) {
 			e[i] = s.Substring(i, 1);
 			c = (int) Convert.ToChar(e[i]);
 			if(c < 127){
-				if(!String.IsNullOrEmpty(vetor[c])){
+				if (!String.IsNullOrEmpty(vetor[c])) {
 					e[i] = vetor[c];
-				} else if(c < 32){
+				} else if (c < 32) {
 					d = "000"+c.ToString("X");
 					e[i] = "\\u"+d.Substring(d.Length-4);
 				}
