@@ -28,12 +28,11 @@ public class Html2CanvasProxy : IHttpHandler {
 		vetor[92] = "\\";
 
 		int i=0;
-		int j=s.Length;
 		int c;
 		string d;
-		string[] e = new string[j];
+		string[] e = new string[s.Length];
 
-		while (i<j) {
+		foreach (string j in e) {
 			e[i] = s.Substring(i, 1);
 			c = (int) Convert.ToChar(e[i]);
 			if(c < 127){
