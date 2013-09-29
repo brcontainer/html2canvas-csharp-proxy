@@ -15,7 +15,39 @@ using System.Security.Cryptography;
 
 public class Html2CanvasProxy : IHttpHandler {
 	private static string JSON_ENCODE (string s) {
-		return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(s);
+		//return new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(s);
+		string[] vetor = new string[127];
+		vetor[0]  = "\\0";
+		vetor[8]  = "\\b";
+		vetor[9]  = "\\t";
+		vetor[10] = "\\n";
+		vetor[12] = "\\f";
+		vetor[13] = "\\r";
+		vetor[34] = "\\\"";
+		vetor[47] = "\\/";
+		vetor[92] = "\\";
+
+		int j=s.Length;
+		int c;
+		string d;
+		string[] e = new string[j];
+
+		for (int i=0; i<j; i++) {
+			e[i] = s.Substring(i, 1);
+			c = (int) Convert.ToChar(e[i]);
+			if(c < 127){
+				if(!String.IsNullOrEmpty(vetor[c])){
+					e[i] = vetor[c];
+				} else if(c < 32){
+					d = "000"+c.ToString("X");
+					e[i] = "\\u"+d.Substring(d.Length-4);
+				}
+			} else {
+				d = "000"+c.ToString("X");
+				e[i] = "\\u"+d.Substring(d.Length-4);
+			}
+		}
+		return "\""+String.Join("",e)+"\"";
 	}
 	public void ProcessRequest (HttpContext context) {
 		//Setup
