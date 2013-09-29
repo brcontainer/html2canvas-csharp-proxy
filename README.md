@@ -1,4 +1,4 @@
-html2canvas-proxy-csharp 0.0.2
+html2canvas-proxy-csharp 0.0.4
 =====================
 
 #### C# Proxy html2canvas ####
