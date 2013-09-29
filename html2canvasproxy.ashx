@@ -41,7 +41,7 @@ public class Html2CanvasProxy : IHttpHandler {
 		//GET
 		string geturl = context.Request.QueryString["url"];
 		string getcallback = context.Request.QueryString["callback"];
-		
+
 		if(geturl!="" && getcallback!=""){
 			string realpath = HttpContext.Current.Server.MapPath("./"+PATH);
 			bool isExists = System.IO.Directory.Exists(realpath);
@@ -78,7 +78,7 @@ public class Html2CanvasProxy : IHttpHandler {
 							shafile = shafile+"."+extesionFile;
 
 							Stream receiveStream = response.GetResponseStream();
-							
+
 							using (System.IO.FileStream fs = System.IO.File.Create(realpath+"\\"+shafile)) {
 								int bytesRead;
 								byte[] buffer = new byte[response.ContentLength];
@@ -122,7 +122,7 @@ public class Html2CanvasProxy : IHttpHandler {
 				}
 			}
 		}
-	
+
 		HS.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
 		HS.Cache.SetValidUntilExpires(false);
 		HS.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
