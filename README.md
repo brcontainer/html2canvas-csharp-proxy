@@ -44,6 +44,9 @@ for a new image, a security error occurs (actually occurs is a security lock), w
 </html>
 ```
 
+### .NET Framework compatibility ###
+From version 0.0.4 has become the code compatible with older versions of the .net framework, being compatible with version .net framework 2.0+
+
 ### Alternatives ###
 You are not using html2canvas but need a similar solution?
 See **simpleHttpProxy**:
