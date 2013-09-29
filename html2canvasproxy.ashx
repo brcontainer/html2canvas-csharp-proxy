@@ -1,6 +1,6 @@
 <%@ WebHandler Language="C#" Debug="true" Class="Html2CanvasProxy" %>
 /*
-  html2canvas-csharp-proxy 0.0.3
+  html2canvas-csharp-proxy 0.0.4
   Copyright (c) 2013 Guilherme Nascimento (brcontainer@yahoo.com.br)
 
   Released under the MIT license
