@@ -35,16 +35,16 @@ public class Html2CanvasProxy : IHttpHandler {
 		foreach (string j in e) {
 			e[i] = s.Substring(i, 1);
 			c = (int) Convert.ToChar(e[i]);
-			if(c < 127){
+			if(c > 126){
+				d = "000"+c.ToString("X");
+				e[i] = "\\u"+d.Substring(d.Length-4);
+			} else {
 				if (!String.IsNullOrEmpty(vetor[c])) {
 					e[i] = vetor[c];
-				} else if (c < 32) {
+				} else if (!(c > 31)) {
 					d = "000"+c.ToString("X");
 					e[i] = "\\u"+d.Substring(d.Length-4);
 				}
-			} else {
-				d = "000"+c.ToString("X");
-				e[i] = "\\u"+d.Substring(d.Length-4);
 			}
 			i++;
 		}
