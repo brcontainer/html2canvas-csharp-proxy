@@ -1,6 +1,6 @@
 <%@ WebHandler Language="C#" Debug="true" Class="Html2CanvasProxy" %>
 /*
-  html2canvas-csharp-proxy 0.0.2
+  html2canvas-csharp-proxy 0.0.4
   Copyright (c) 2013 Guilherme Nascimento (brcontainer@yahoo.com.br)
 
   Released under the MIT license
@@ -122,6 +122,11 @@ public class Html2CanvasProxy : IHttpHandler {
 				}
 			}
 		}
+	
+		HS.AddHeader("Pragma", "no-cache");
+		HS.AddHeader("Cache-Control", "no-cache");
+		HS.AddHeader("Expires", new DateTime(DateTime.UtcNow.Ticks).ToString("R"));
+
 		HS.Write(getcallback+"("+Html2CanvasProxy.JSON_ENCODE("error:"+ERR)+")");
 	}
 
