@@ -47,8 +47,17 @@ for a new image, a security error occurs (actually occurs is a security lock), w
 ### .NET Framework compatibility ###
 From version 0.0.4 has become the code compatible with older versions of the .net framework, being compatible with version .net framework 2.0+
 
-### Alternatives ###
+### Alternatives for C#(C Sharp) ###
 You are not using html2canvas but need a similar solution?
 See **simpleHttpProxy**:
 
 *c#* https://github.com/brcontainer/simple-http-proxy-csharp
+
+
+
+### Others scripting language ###
+
+You do not use PHP, but need html2canvas working with proxy, see other proxies:
+
+* [html2canvas proxy in php](https://github.com/brcontainer/html2canvas-php-proxy)
+* [html2canvas proxy in asp classiv (vbscript)](https://github.com/brcontainer/html2canvas-asp-vbscript-proxy)
