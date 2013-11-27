@@ -57,7 +57,7 @@ See **simpleHttpProxy**:
 
 ### Others scripting language ###
 
-You do not use PHP, but need html2canvas working with proxy, see other proxies:
+You do not use ASP.NET, but need html2canvas working with proxy, see other proxies:
 
 * [html2canvas proxy in php](https://github.com/brcontainer/html2canvas-php-proxy)
 * [html2canvas proxy in asp classiv (vbscript)](https://github.com/brcontainer/html2canvas-asp-vbscript-proxy)
