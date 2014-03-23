@@ -28,21 +28,25 @@ I ask you to follow me or "star" my repository to track updates
         <meta charset="utf-8">
         <title>html2canvas ashx (c#) proxy</title>
         <script src="html2canvas.js"></script>
-        <script>
-        window.onload = function(){
-          html2canvas( [ document.body ], {
-                "proxy":"html2canvasproxy.ashx",
-                "onrendered": function(canvas) {
-                    var uridata = canvas.toDataURL("image/png");
-                    window.open(uridata);
-                }
-            });
-        };
-        </script>
+		<script>
+		//<![CDATA[
+		(function() {
+			window.onload = function() {
+				html2canvas(document.body, {
+					"proxy":"html2canvasproxy.ashx",
+					"onrendered": function(canvas) {
+						var uridata = canvas.toDataURL("image/png");
+						window.open(uridata);
+					}
+				});
+			};
+		})();
+		//]]>
+		</script>
     </head>
     <body>
         <p>
-            <img alt="google maps static" src="http://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&maptype=roadmap&sensor=false">
+            <img alt="google maps static" src="http://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&amp;zoom=12&amp;size=400x400&amp;maptype=roadmap&amp;sensor=false">
         </p>
     </body>
 </html>
