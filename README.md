@@ -3,9 +3,16 @@ html2canvas-proxy-csharp 0.0.4
 
 #### C# Proxy html2canvas ####
 
-
 This script allows you to use **html2canvas.js** with different servers, ports and protocols (http, https),
 preventing to occur "tainted" when exporting the `<canvas>` for image.
+
+### Others scripting language ###
+
+You do not use ASP.NET, but need html2canvas working with proxy, see other proxies:
+
+* [html2canvas proxy in php](https://github.com/brcontainer/html2canvas-php-proxy)
+* [html2canvas proxy in asp classic (vbscript)](https://github.com/brcontainer/html2canvas-asp-vbscript-proxy)
+* [html2canvas proxy in python (work any framework)](https://github.com/brcontainer/html2canvas-proxy-python)
 
 ###Problem and Solution###
 When adding an image that belongs to another domain in `<canvas>` and after that try to export the canvas
@@ -91,12 +98,3 @@ You are not using html2canvas but need a similar solution?
 See **simpleHttpProxy**:
 
 *c#* https://github.com/brcontainer/simple-http-proxy-csharp
-
-
-
-### Others scripting language ###
-
-You do not use ASP.NET, but need html2canvas working with proxy, see other proxies:
-
-* [html2canvas proxy in php](https://github.com/brcontainer/html2canvas-php-proxy)
-* [html2canvas proxy in asp classic (vbscript)](https://github.com/brcontainer/html2canvas-asp-vbscript-proxy)
