@@ -1,4 +1,4 @@
-html2canvas-proxy-csharp 0.0.4
+html2canvas-proxy-csharp 0.0.5
 =====================
 
 #### C# Proxy html2canvas ####
@@ -70,7 +70,7 @@ I ask you to follow me or "star" my repository to track updates
 </html>
 ```
 
-#### Using Web Cosnole ####
+#### Using Web Console ####
 
 If you have any problems with the script recommend to analyze the log using the Web Console from your browser:
 * Firefox: https://developer.mozilla.org/en-US/docs/Tools/Browser_Console
@@ -98,3 +98,18 @@ You are not using html2canvas but need a similar solution?
 See **simpleHttpProxy**:
 
 *c#* https://github.com/brcontainer/simple-http-proxy-csharp
+
+### Changlog ###
+
+#### html2canvas-csharp-proxy 0.0.5 ####
+
+ * Added support to HTTP Basic access authentication 
+ * Added support to use data URI scheme in callback
+ * Added support to SVG images
+ * Added support to requests/response without "Content-Length"
+ * Added detection if the "Content-Length" header is equal to "0" (Content-Length: 0)
+ * Moved "setup vars" to "Class"
+ * Removed unecessary "fullurl = fullurl"
+ * Removed "must-revalidate" header
+ * Remove charset in "mimetype"
+ * Fixed bug in detecting if "callback" and "url" are undefined (GET params)
