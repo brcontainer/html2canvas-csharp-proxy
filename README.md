@@ -1,4 +1,4 @@
-html2canvas-proxy-csharp 0.0.5
+html2canvas-proxy-csharp 0.0.6
 =====================
 
 #### C# Proxy html2canvas ####
@@ -101,7 +101,7 @@ See **simpleHttpProxy**:
 
 ### Changlog ###
 
-#### html2canvas-csharp-proxy 0.0.5 ####
+#### html2canvas-csharp-proxy 0.0.5 and 0.0.6 ####
 
  * Added support to HTTP Basic access authentication 
  * Added support to use data URI scheme in callback
@@ -113,3 +113,6 @@ See **simpleHttpProxy**:
  * Removed "must-revalidate" header
  * Remove charset in "mimetype"
  * Fixed bug in detecting if "callback" and "url" are undefined (GET params)
+ * Fixed Ascii2Inline function (version 0.0.6)
+ * Fixed size in buffer (sometimes had negative number and the buffer causing an error in the script) (version 0.0.6)
+ * Replace "tabs" by space (4 size) (version 0.0.6)
