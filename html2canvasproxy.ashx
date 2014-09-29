@@ -242,7 +242,7 @@ public class Html2CanvasProxy : IHttpHandler {
                                 int bytesRead;
                                 long sizeBytes = response.ContentLength;
 
-                                if (sizeBytes < 1) {
+                                if (!(sizeBytes > 1)) {
                                     sizeBytes = Int32.MaxValue / 2;
                                 }
 
